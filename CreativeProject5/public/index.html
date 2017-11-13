@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <title>Pok&#233;Dex</title>
+    <link rel="shortcut icon" type="image/x-icon" href="Assets/pokedexlogo.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script
+        src="http://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script>
+      var currentPokemon = "bulbasaur";
+      var pokemonNames = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoranf", "Nidorina", "Nidoqueen", "Nidoranm", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebell", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetchd", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "Mr-Mime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew"];
+
+      function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+      function getTypeLogo(type) {
+        switch(type) {
+          case "Normal":
+            return "<img class=\"typelogo\" src=\"Assets/normaltype.png\">";
+          case "Fire":
+            return "<img class=\"typelogo\" src=\"Assets/firetype.png\">";
+          case "Water":
+            return "<img class=\"typelogo\" src=\"Assets/watertype.png\">";
+          case "Electric":
+            return "<img class=\"typelogo\" src=\"Assets/electrictype.png\">";
+          case "Grass":
+            return "<img class=\"typelogo\" src=\"Assets/grasstype.png\">";
+          case "Ice":
+            return "<img class=\"typelogo\" src=\"Assets/icetype.png\">";
+          case "Fighting":
+            return "<img class=\"typelogo\" src=\"Assets/fightingtype.png\">";
+          case "Poison":
+            return "<img class=\"typelogo\" src=\"Assets/poisontype.png\">";
+          case "Ground":
+            return "<img class=\"typelogo\" src=\"Assets/groundtype.png\">";
+          case "Flying":
+            return "<img class=\"typelogo\" src=\"Assets/flyingtype.png\">";
+          case "Psychic":
+            return "<img class=\"typelogo\" src=\"Assets/psychictype.png\">";
+          case "Bug":
+            return "<img class=\"typelogo\" src=\"Assets/bugtype.png\">";
+          case "Rock":
+            return "<img class=\"typelogo\" src=\"Assets/rocktype.png\">";
+          case "Ghost":
+            return "<img class=\"typelogo\" src=\"Assets/ghosttype.png\">";
+          case "Dragon":
+            return "<img class=\"typelogo\" src=\"Assets/dragontype.png\">";
+          case "Dark":
+            return "<img class=\"typelogo\" src=\"Assets/darktype.png\">";
+          case "Steel":
+            return "<img class=\"typelogo\" src=\"Assets/steeltype.png\">";
+          case "Fairy":
+            return "<img class=\"typelogo\" src=\"Assets/fairytype.png\">";
+          }
+      }
+      function findPokemon(value) {
+        var myurl = "../pokemon/?q=";
+        myurl += value.toLowerCase();
+        console.log(myurl);
+        $.getJSON(myurl,function(data) {
+          console.log(data);
+          var name = capitalize(data['name']);
+          var number = data['number']+"";
+          if (Number(number) < 100) {
+            number = "0" + number;
+            if (Number(number) < 10) {
+              number = "0" + number;
+            }
+          }
+          var imgurl = data['sprite'];
+          var type = capitalize(data['type1']);
+          if(data['type2']) {
+            var type2 = capitalize(data['type2']);
+          }
+          var speed = data['speed'];
+          var spdef = data['special_defense'];
+          var spatt = data['special_attack'];
+          var def = data['defense'];
+          var att = data['attack'];
+          var hp = data['hp'];
+          var newHtml = "<h3>"+number+": "+name+"<br><img class=\"pokeSprite\" src=\""+imgurl+"\"><br>";
+          newHtml += getTypeLogo(type);
+          if (type2 != null) {
+            newHtml += getTypeLogo(type2);
+          }
+          newHtml += "</h3>";
+          newHtml += makeStatTable(speed, spdef, spatt, def, att, hp);
+          $("#pokeResults").html(newHtml);
+          currentPokemon = name.toLowerCase();
+          document.getElementById("spriteForm").reset();
+          document.getElementById("searchForm").reset();
+        });
+      }
+      function makeStatTable(speed, spdef, spatt, def, att, hp){
+        return "<table class=\"table table-hover\"><tbody><tr><td><b>Speed</b></td><td>"+speed+"</td></tr><tr><td><b>Special Defense</b></td><td>"+spdef+"</td></tr><tr><td><b>Special Attack</b></td><td>"+spatt+"</td></tr><tr><td><b>Defense</b></td><td>"+def+"</td></tr><tr><td><b>Attack</b></td><td>"+att+"</td></tr><tr><td><b>HP</b></td><td>"+hp+"</td></tr></tbody></table>";
+      }
+      $(document).ready(function() {
+        $("#searchBar").keypress(function(event) {
+          var key = event.which;
+          if (key == 13) {
+            $("#searchButton").click();
+            return false;
+          }
+        });
+        $("#searchButton").click(function(e){
+          findPokemon($("#searchBar").val());
+        });
+        $("#changeSpriteButton").click(function(e) {
+          var value = $("#changeSpriteInput").val();
+          $.post("../pokemonSprite",
+          {
+            name: currentPokemon,
+            spriteURL: value
+          },
+          function(data, status) {
+            findPokemon(currentPokemon);
+          });
+        });
+        $("#searchBar").autocomplete({
+          source: pokemonNames,
+          autoFocus: true
+        });
+      });
+    </script>
+  </head>
+<body>
+  <body class="screen">
+    <div class="well">
+      <header>
+        <img id="logo" src="Assets/pokedexlogo.png" alt="PokeDex Logo">
+        <br>
+        Pok&#233;Dex
+      </header>
+      <form id="searchForm" class="form-inline">
+        <div class="form-group">
+          <label for="searchBar">Search Pok&#233;mon:</label>
+          <input type="text" class="form-control" id="searchBar" placeholder="Pok&#233;mon Name">
+          <button id="searchButton" type="button" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+      <p>Original 151 Pok&#233;mon only</p>
+    </div>
+
+    <div id="resultsDiv" class="col-md-4 col-md-offset-4">
+      <div id="pokeResults">
+        <h3>001: Bulbasaur
+          <br>
+          <img class="pokeSprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
+          <br>
+          <img class="typelogo" src="Assets/poisontype.png">
+          <img class="typelogo" src="Assets/grasstype.png">
+        </h3> 
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td><b>Speed</b></td>
+              <td>45</td>
+            </tr>
+            <tr>
+              <td><b>Special Defense</b></td>
+              <td>65</td>
+            </tr>
+            <tr>
+              <td><b>Special Attack</b></td>
+              <td>65</td>
+            </tr>
+            <tr>
+              <td><b>Defense</b></td>
+              <td>49</td>
+            </tr>
+            <tr>
+              <td><b>Attack</b></td>
+              <td>49</td>
+            </tr>
+            <tr>
+              <td><b>HP</b></td>
+              <td>45</td>
+            </tr>
+          </tbody>
+        </table> 
+      </div>
+      <form class="form-inline" id="spriteForm">
+        <div class="form-group" style="margin-top: 5px">
+          <label for="changeSpriteInput">Change Pok&#233;mon Sprite:</label>
+          <input type="text" class="form-control" id="changeSpriteInput" placeholder="New Sprite URL">
+          <button id="changeSpriteButton" type="button" class='btn btn-primary'>Change Sprite</button>
+        </div>
+      </form>
+    </div>
+
+  </body>
+</body>
+  <footer>
+  </footer>
+</html>

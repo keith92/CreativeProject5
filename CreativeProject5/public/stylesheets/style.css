@@ -1,0 +1,48 @@
+p {
+  margin:0;
+
+  text-align: center
+}
+
+.form-inline {
+  text-align: center;
+}
+
+body {
+  background-color: black;
+}
+
+.screen header {
+  text-align: center;
+  font-size: 30px;
+
+}
+
+.screen header img {
+  width: 10%;
+}
+
+#resultsDiv {
+  border-radius: 10px;
+  border: 40px solid darkred;
+  background-color: white;
+  margin:0;
+  width: 50%;
+  position: absolute;
+  left: 24%;
+}
+#resultsDiv h3{
+  text-align: center;
+}
+
+#resultsDiv img {
+  text-align: center;
+}
+
+.typelogo {
+  width: 80px;
+}
+
+.pokeSprite {
+  width: 125px;
+}
