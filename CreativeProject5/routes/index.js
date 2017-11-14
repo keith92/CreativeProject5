@@ -48,7 +48,7 @@ router.post('/pokemonSprite',function(req, res) {
   collection.updateOne(query, newValues, function(err,res) {
     if (err) return console.error(err);
     else {
-      res.end('{"success" : "Updated Successfully", "status" : 200}');
+      res.status(200);
     }
   });
 });
