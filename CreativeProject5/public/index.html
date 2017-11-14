@@ -121,7 +121,7 @@
             name: currentPokemon,
             spriteURL: value
           },
-          function(data, status) {
+          function(status) {
             findPokemon(currentPokemon);
           });
         });
@@ -152,41 +152,6 @@
 
     <div id="resultsDiv" class="col-md-4 col-md-offset-4">
       <div id="pokeResults">
-        <!-- <h3>001: Bulbasaur
-          <br>
-          <img class="pokeSprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
-          <br>
-          <img class="typelogo" src="Assets/poisontype.png">
-          <img class="typelogo" src="Assets/grasstype.png">
-        </h3> 
-        <table class="table table-hover">
-          <tbody>
-            <tr>
-              <td><b>Speed</b></td>
-              <td>45</td>
-            </tr>
-            <tr>
-              <td><b>Special Defense</b></td>
-              <td>65</td>
-            </tr>
-            <tr>
-              <td><b>Special Attack</b></td>
-              <td>65</td>
-            </tr>
-            <tr>
-              <td><b>Defense</b></td>
-              <td>49</td>
-            </tr>
-            <tr>
-              <td><b>Attack</b></td>
-              <td>49</td>
-            </tr>
-            <tr>
-              <td><b>HP</b></td>
-              <td>45</td>
-            </tr>
-          </tbody>
-        </table>  -->
       </div>
       <form class="form-inline" id="spriteForm">
         <div class="form-group" style="margin-top: 5px">

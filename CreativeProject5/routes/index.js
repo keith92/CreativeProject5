@@ -10,7 +10,7 @@ MongoClient.connect(dbUrl, function (err, db) {
     console.log('Unable to connect to the mongoDB server. Error:', err);
   } else {
     console.log('Connection established to', dbUrl);
-    
+
     collection = db.collection('pokemons');
 
     // Need to run this first time to populate database.
@@ -30,8 +30,8 @@ router.get('/', function(req, res, next) {
 router.get('/pokemon',function(req,res,next) {
   var query = { name: req.query.q};
 
-  collection.find(query).toArray(function(err,result) { 
-    if (err) return console.error(err); 
+  collection.find(query).toArray(function(err,result) {
+    if (err) return console.error(err);
     else {
       res.status(200).json(result[0]);
     }
@@ -42,13 +42,13 @@ router.post('/pokemonSprite',function(req, res) {
   console.log("In Pokemon Post");
   console.log(req.body);
   var url = req.body['spriteURL'];
-  
+
   var query = {name: req.body['name']};
   var newValues = { $set: { sprite: url}};
   collection.update(query, newValues, function(err,result) {
     if (err) return console.error(err);
     else {
-      res.status(200);
+      res.end('{"success" : "Updated Successfully", "status" : 200}');
     }
   });
 });
