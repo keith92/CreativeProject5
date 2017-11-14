@@ -133,7 +133,7 @@
     </script>
   </head>
 <body>
-  <body class="screen">
+  <body class="screen" onload="findPokemon('Bulbasaur')">
     <div class="well">
       <header>
         <img id="logo" src="Assets/pokedexlogo.png" alt="PokeDex Logo">
@@ -151,7 +151,7 @@
     </div>
 
     <div id="resultsDiv" class="col-md-4 col-md-offset-4">
-      <div id="pokeResults" onload="findPokemon(Bulbasaur)">
+      <div id="pokeResults">
         <!-- <h3>001: Bulbasaur
           <br>
           <img class="pokeSprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
