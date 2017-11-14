@@ -44,8 +44,8 @@ router.post('/pokemonSprite',function(req, res) {
   var url = req.body['spriteURL'];
 
   var query = {name: req.body['name']};
-  var newValues = { $set: { sprite: url}};
-  collection.update(query, newValues, function(err,result) {
+  // var newValues = { $set: { sprite: url}};
+  collection.update(query, {$set: {sprite: url}}, function(err,result) {
     if (err) return console.error(err);
     else {
       res.status(200);
