@@ -13,11 +13,12 @@ MongoClient.connect(dbUrl, function (err, db) {
     
     collection = db.collection('pokemons');
 
-    for(var key in pokemon) {
-      collection.insert(pokemon[key], function (err, result) {
-        if (err) {console.log(err)};
-      });
-    }
+    // Need to run this first time to populate database.
+    // for(var key in pokemon) {
+    //   collection.insert(pokemon[key], function (err, result) {
+    //     if (err) {console.log(err)};
+    //   });
+    // }
   }
 });
 
