@@ -40,11 +40,16 @@ router.get('/pokemon',function(req,res,next) {
 router.post('/pokemonSprite',function(req, res) {
   console.log("In Pokemon Post");
   console.log(req.body);
-  var name = req.body['name'];
   var url = req.body['spriteURL'];
-  pokemon[name]['sprite'] = url;
-  console.log(pokemon[name]);
-  res.end('{"success" : "Updated Successfully", "status" : 200}');
+
+  var query = {name: req.body['name']};
+  var newValues = { $set: { sprite: url}};
+  collection.updateOne(query, newValues, function(err,res) {
+    if (err) return console.error(err);
+    else {
+      res.end('{"success" : "Updated Successfully", "status" : 200}');
+    }
+  });
 });
 
 module.exports = router;
